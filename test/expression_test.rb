@@ -54,4 +54,12 @@ class LookupOrMethodCallTest < Sablon::TestCase
     assert_equal nil, expr.evaluate({})
   end
 
+  def test_missing_collection_receiver
+    expr = Sablon::Statement::Loop.new(Sablon::Expression.parse("db.users:each(user)"))
+    assert_equal nil, expr.evaluate({})
+
+    expr = Sablon::Statement::Loop.new(Sablon::Expression.parse("db.users:endEach"))
+    assert_equal nil, expr.evaluate({})
+  end
+
 end
